@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="css/adminPage.css">
+
+    <title>Admin Page</title>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header__container">
+            <!-- <img src="" alt="" class="header__img"> -->
+
+            <a href="#" class="header__logo"> CoffeBeans Admin</a>
+
+            <div>
+                <a href="/trscAdmin"><i class='bx bx-basket'></i></a>
+                <a href="/index"><i class='bx bx-log-out nav__icon'></i></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contents -->
+    <main>
+        <section>
+            <div class="p-4 p-md-5 mb-4 row " id="projectPage">
+                <h3 class="bold" id="user">Data Input From User</h3>
+                <table class="border" cellpadding="8">
+                    <ul>
+                        <tr>
+                            <th class="border"> Username </th>
+                            <th class="border"> Email </th>
+                            <th class="border"> Password </th>
+                            <th class="border"> Edit </th>
+                            <th class="border"> Delete </th>
+                        </tr>
+                        <% for (const u of user) { %>
+                            <tr>
+                                <td class="border">
+                                    <%= u.username %>
+                                </td>
+                                <td class="border">
+                                    <%= u.email %>
+                                </td>
+                                <td class="border">
+                                    <%= u.password %>
+                                </td>
+                                <td class="border"><a href="/edit/<%= u.id %>">Edit</a></td>
+                                <td class="border"><a href="/delete/<%= u.id %>">Delete</a></td>
+                            </tr>
+                            <% } %>
+                    </ul>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Script JS -->
+    <script src="script.js"></script>
+</body>
+
+</html>

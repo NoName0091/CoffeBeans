@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet/less" type="text/css" href="css/adminlogin.less" />
+    <script src="https://cdn.jsdelivr.net/npm/less" ></script>
+</head>
+
+<div class="wrapper">
+	<div class="container">
+		<header>Hello, Admin!</header>
+		
+		<form action="/admin" method="post">
+            <div class="field email">
+                <div class="input-area">
+			        <input type="email" name="email" placeholder="Email Adderss" required>
+                    <i class="error error-icon fas fa-exclamation-circle"></i>
+                </div>
+            </div>
+            <div class="field password">
+                <div class="input-area">
+			        <input type="password" name="pass" placeholder="Password" required>
+                    <i class="error error-icon fas fa-exclamation-circle"></i>
+                </div>
+            </div>
+			<button type="submit" id="login-button">Login</button>
+		</form>
+	</div>
+	
+	<ul class="bg-bubbles">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</div>
+
+<script src="adminlogin.js"></script>
+</body>
+
+</html>

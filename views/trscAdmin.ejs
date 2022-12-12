@@ -1,0 +1,153 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Cafe</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    
+    <main class="container">
+        <div class="p-4 p-md-5 mb-3 flex" id="bioPage" style="background-color: #fff; border-radius: 2% ;">
+            <h3 class="subJudul mb-5 text-center" id="coursePage">Stock Warehouse</h3>
+
+            <form action="/items/tambah" method="post">
+                <div class="p-4 mt-4 bg-white shadow-lg">
+                    <h4 class="subJudul mb-4 mt-2" id="coursePage">Add Item</h4>
+
+                    <div class="form">
+                        <p>Product Name</p>
+                        <input type="text" name="name" class="form-control mb-3" placeholder="Nama" required>
+                    </div>
+
+                    <div class="form">
+                        <p>Product Price</p>
+                        <input type="text" name="harga" class="form-control mb-3" placeholder="Harga" required>
+                    </div>
+
+                    <div class="form">
+                        <p>Product Picture</p>
+                        <input type="file" name="gambar" class="form-control mb-4" required>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-success" type="submit">Add</button>
+                    </div>
+                </div>
+            </form>
+
+            <section class="p-4 mt-4 bg-white shadow-lg">
+                <h4 class="subJudul mb-3" id="coursePage">Stock Item Updates</h4>
+                <form action="/items/tarik" method="post">
+                    <div class="flex items-center">
+                        <select name="type" class="w-1/5 w-full border px-3 py-2 text-sm mr-2 bg-white">
+                            <option value="masuk">In Stock</option>
+                            <option value="ditarik">Stock Withdraw</option>
+                        </select>
+                        <select placeholder="Paket Item" name="item_id"
+                            class="w-2/5 w-full border px-3 py-2 text-sm mr-2 bg-white">
+                            <% for (item of items) { %>
+                                <option value="<%= item.id %>">
+                                    <%= item.name %>
+                                </option>
+                                <% } %>
+                        </select>
+                        <input type="number" name="amount" value="0"
+                            class="w-2/5 w-full border px-3 py-2 text-sm mr-2 bg-white" style="width: 2cm;">
+                            <p class="w-2/5 w-full btn px-1 py-2 text-sm mr-2">/items</p>
+                        <button
+                            class="w-1/5 bg-slate-500 text-white px-3 py-2 border text-sm font-bold tracking-widest hover:bg-slate-600"
+                            style="background-color: #008148; border: transparent; margin-left: 20px; border-radius: 5px;">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="p-4 mt-4 bg-white shadow-lg">
+                <h4 class="subJudul mb-3" id="coursePage">Items Package List</h4>
+                <h6>NOTE:  Jika Ingin Menghapus Item, Hapus Pembukuan Terlebih Dahulu</h6>
+                <table class="border" cellpadding="10">
+                    <ul>
+                        <tr>
+                            <th class="border"> Item Name </th>
+                            <th class="border"> Item Price </th>
+                            <th class="border"> Stock Items </th>
+                            <th class="border"> Item Image </th>
+                            <th class="border"> Status Item </th>
+                            <th class="border"> Action </th>
+                        </tr>
+                        <% for (item of items) { %>
+                            <tr>
+                                <th class="border">
+                                    <%= item.name %>
+                                </th>
+                                <th class="border"> Rp.<%= item.harga %>
+                                </th>
+                                <th class="border">
+                                    <%= item.qty %> pcs
+                                </th>
+                                <th class="border"><img height="100px" src="<%= item.gambar %>"></th>
+                                <th class="border">
+                                    <%= item.status %>
+                                </th>
+                                <th class="border"><a href="/deleteItems/<%= item.id %>">Delete</a></th>
+                            </tr>
+                            <% }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            %>
+                    </ul>
+                </table>
+            </section>
+
+            <section class="p-4 mt-4 bg-white shadow-lg">
+                <h4 class="subJudul mb-3" id="coursePage">History Stok</h4>
+                <table class="border" cellpadding="10">
+                    <ul>
+                        <tr>
+                            <th class="border"> Type </th>
+                            <th class="border"> Buyer Name </th>
+                            <th class="border"> Item Name </th>
+                            <th class="border"> Quantity </th>
+                            <th class="border"> Time And Date </th>
+                            <th class="border"> Action </th>
+                        </tr>
+                        <% for (log of pembukuan) { %>
+                            <tr>
+                                <th class="border">
+                                    <%= log.type %>
+                                </th>
+                                <th class="border">
+                                    <%= log.pembeli %>
+                                </th>
+                                <th class="border">
+                                    <%= items.find(item=> item.id === log.item_id).name %>
+                                </th>
+                                <th class="border">
+                                    <%= log.amount %> pcs
+                                </th>
+                                <th class="border">
+                                    <%= log.create_time%>
+                                </th>
+                                <th class="border"><a href="/deletepembukuan/<%= log.id %>">Delete</a></th>
+                            </tr>
+                            <% } %>
+                    </ul>
+                </table>
+            </section>
+
+            <div class="col-md-12 text-center">
+                <a href="/dataAdmin" class="btn btn-secondary btn-lg" role="button" style="margin-top: 20px;">Back To
+                    Home</a>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+
+</html>

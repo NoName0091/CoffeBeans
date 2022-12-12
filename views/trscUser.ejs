@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Order Coffee</title>
+    <link rel="stylesheet" type="text/css" href="css/cart.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <!----header start--->
+    <header>
+        <a href="#" class="logo"><img src="/img/logo.png"></a>
+        <div class="bx bx-menu" id="menu-icon"></div>
+
+        <div class="dropdown">
+            <button class="dropbtn">Menu</button>
+            <div class="dropdown-content">
+                <a href="/cafe">Back To Home</a>
+                <a href="/logout">Log Out</a>
+            </div>
+        </div>
+    </header>
+
+    <!----shop start--->
+    <section class="shop" id="shop">
+        <div class="container">
+            <% for (item of items) { %>
+                <div class="box">
+                    <img src="<%= item.gambar %>" style="width: 350px; height: 400px;">
+                    <h4>
+                        <%= item.name %>
+                    </h4>
+                    <h5>
+                        Rp. <%= item.harga %>
+                    </h5>
+                </div>
+                <% } %>
+        </div>
+    </section>
+
+    <div class="form-center">
+        <form action="/items/beli" method="post" id="formCheckout">
+            <h3 class="subJudul mt-5 mb-4" id="projectPage">Form Pembelian</h3>
+            <div class="flex items-center">
+                <input type="text" name="pembeli" placeholder="Nama Pembeli"
+                    class="w-2/5 w-full border px-3 py-2 text-sm mr-2 bg-white">
+                <select name="type" class="w-2/5 w-full border px-3 py-2 text-sm mr-2 bg-white">
+                    <option value="dibeli">Dibeli</option>
+                </select>
+                <select placeholder="Paket Item" name="item_id"
+                    class="w-2/5 w-full border px-3 py-2 text-sm mr-2 bg-white">
+                    <% for (item of items) { %>
+                        <option value="<%= item.id %>">
+                            <%= item.name %>
+                        </option>
+                        <% } %>
+                </select>
+                <input type="number" name="amount" value="0"
+                    class="w-2/5 w-full border px-3 py-2 text-sm mr-2 bg-white" style="width: 2cm;">
+                    <p class="w-2/5 w-full btn px-1 py-2 text-sm mr-2">/items</p>
+                <button class="w-30 btn btn-lg btn-primary"
+                    style="background-color: #1e3932; font-size: 15px; border: transparent;"
+                    onclick="alert('Pembelian Berhasil!')">
+                    Buy
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!----about start--->
+    <section class="about" id="about">
+        <div class="about-content">
+            <h2>About</h2>
+            <p>I'm a paragraph. Click here to add your own text and edit me. It’s easy. Just click “Edit Text” or double
+                click me to add your own content and make changes to the font. I’m a great place for you to tell a story
+                and let your users know a little more about you.</p>
+        </div>
+    </section>
+
+    <!----contact start--->
+    <section class="contact" id="contact">
+        <div class="main-contact">
+            <div class="contact-content">
+                <li><a href="#">Shipping & Returns</a></li>
+                <li><a href="#">Store Policy</a></li>
+                <li><a href="#">Payment Methods</a></li>
+            </div>
+
+            <div class="contact-content">
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Tel: 123-456-7890</a></li>
+            </div>
+
+            <div class="contact-content">
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Instagram</a></li>
+                <li><a href="#">Pinterest</a></li>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="last">
+        <p></p>
+    </div>
+
+    <!----custom js link--->
+    <script src="cart.js"></script>
